@@ -2,6 +2,7 @@ from flask import Flask
 
 ERROR_MESSAGE: str = "Error: message not found"
 INCORRECT_ENDPOINT: str = f"{ERROR_MESSAGE}, correct endpoint /rev/*your message*"
+INFO_MESSAGE: str = "Info: To reverse message, use /rev/*your message*"
 
 
 def handle_rev(text: str):
@@ -26,7 +27,7 @@ def rev_without_text():
 
 @flask_app.route('/')
 def main():
-    return "Info: To reverse message, use /rev/*your message*"
+    return INFO_MESSAGE
 
 
 @flask_app.route('/health')
