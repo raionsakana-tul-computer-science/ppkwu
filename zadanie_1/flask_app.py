@@ -1,5 +1,7 @@
 from flask import Flask
 
+ERROR_MESSAGE: str = "Error: message not found"
+
 flask_app = Flask(__name__)
 
 
@@ -8,7 +10,7 @@ def rev(text: str):
     if text is not None:
         return text[::-1]
 
-    return "Error: message not found"
+    return ERROR_MESSAGE
 
 
 if __name__ == '__main__':
