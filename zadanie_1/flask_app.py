@@ -24,6 +24,11 @@ def rev_without_text():
     return INCORRECT_ENDPOINT
 
 
+@flask_app.route('/')
+def main():
+    return "Info: To reverse message, use /rev/*your message*"
+
+
 @flask_app.route('/health')
 def health():
     return ""
