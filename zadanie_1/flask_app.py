@@ -5,7 +5,7 @@ flask_app = Flask(__name__)
 
 @flask_app.route('/rev/<text>')
 def hello(text: str):
-    return text
+    return text[::-1]
 
 
 if __name__ == '__main__':
