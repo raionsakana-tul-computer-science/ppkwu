@@ -25,6 +25,11 @@ def rev_without_text():
     return INCORRECT_ENDPOINT
 
 
+@flask_app.route('/rev/')
+def rev_without_text_only_slash():
+    return INCORRECT_ENDPOINT
+
+
 @flask_app.route('/')
 def main():
     return INFO_MESSAGE
