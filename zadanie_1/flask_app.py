@@ -4,7 +4,7 @@ flask_app = Flask(__name__)
 
 
 @flask_app.route('/rev/<text>')
-def hello(text: str):
+def rev(text: str):
     return text[::-1]
 
 
