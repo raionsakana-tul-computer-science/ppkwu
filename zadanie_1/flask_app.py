@@ -5,7 +5,10 @@ flask_app = Flask(__name__)
 
 @flask_app.route('/rev/<text>')
 def rev(text: str):
-    return text[::-1]
+    if text is not None:
+        return text[::-1]
+
+    return "Error: message not found"
 
 
 if __name__ == '__main__':
