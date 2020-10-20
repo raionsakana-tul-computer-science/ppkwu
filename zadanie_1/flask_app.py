@@ -1,6 +1,7 @@
 from flask import Flask
 
 ERROR_MESSAGE: str = "Error: message not found"
+INCORRECT_ENDPOINT: str = f"{ERROR_MESSAGE}, correct endpoint /rev/*your message*"
 
 
 def handle_rev(text: str):
@@ -20,7 +21,7 @@ def rev(text: str):
 
 @flask_app.route('/rev')
 def rev_without_text():
-    return f"{ERROR_MESSAGE}, correct endpoint /rev/*your message*"
+    return INCORRECT_ENDPOINT
 
 
 if __name__ == '__main__':
