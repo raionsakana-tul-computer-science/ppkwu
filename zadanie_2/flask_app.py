@@ -1,11 +1,13 @@
+from typing import Callable, Dict
 from flask import Flask, abort
+
 from json import dumps
 
 INFO_MESSAGE: str = "Info: To get stats of message, use /*endpoint name*/*your message*"
 flask_app = Flask(__name__)
 
 
-def count_characters(text, condition):
+def count_characters(text: str, condition: Callable) -> Dict:
     index, mark = 0, False
     temp_letters = [0]
 
@@ -29,19 +31,19 @@ def count_characters(text, condition):
     }
 
 
-def check_if_big_letter(c: str):
+def check_if_big_letter(c: str) -> bool:
     return c.isupper()
 
 
-def check_if_small_letter(c: str):
+def check_if_small_letter(c: str) -> bool:
     return c.islower()
 
 
-def check_if_number(c: str):
+def check_if_number(c: str) -> bool:
     return c.isnumeric()
 
 
-def check_if_special_character(c: str):
+def check_if_special_character(c: str) -> bool:
     return not c.isnumeric() and not c.isupper() and not c.islower()
 
 
