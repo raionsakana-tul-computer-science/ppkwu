@@ -62,7 +62,9 @@ Endpoint zwraca informację o ilości wystąpięń znaków specjalnych w ciągu 
 <b>Przykładowa odpowiedź<b>:
 ```json
 {
-  "special-characters": 0
+  "special-characters": 0,
+  "number-of-strings": 0,
+  "number-of-characters-in-string": 0
 }
 ```
 
