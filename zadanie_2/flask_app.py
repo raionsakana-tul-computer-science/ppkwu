@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, abort
 from json import dumps
 
 INFO_MESSAGE: str = "Info: To get stats of message, use /*endpoint name*/*your message*"
@@ -17,6 +17,9 @@ def health():
 
 @flask_app.route('/big-letters/<text>')
 def big_letters(text: str):
+    if text is None:
+        abort(415)
+
     return dumps({
         "big-letters": sum(1 for c in text if c.isupper())
     })
