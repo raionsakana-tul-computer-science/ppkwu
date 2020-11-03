@@ -36,7 +36,9 @@ Endpoint zwraca informację o ilości wystąpięń małych liter.
 <b>Przykładowa odpowiedź<b>:
 ```json
 {
-  "small-letters": 0
+  "small-letters": 0,
+  "number-of-strings": 0,
+  "number-of-characters-in-string": 0
 }
 ```
 
