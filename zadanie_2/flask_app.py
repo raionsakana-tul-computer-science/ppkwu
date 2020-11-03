@@ -29,5 +29,15 @@ def big_letters(text: str):
     })
 
 
+@flask_app.route('/small-letters/<text>')
+def small_letters(text: str):
+    if text is None:
+        abort(415)
+
+    return dumps({
+        "small-letters": sum(1 for c in text if c.islower())
+    })
+
+
 if __name__ == '__main__':
     flask_app.run(host='127.0.0.1', port=80)
