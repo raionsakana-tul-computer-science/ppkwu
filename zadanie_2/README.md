@@ -25,7 +25,7 @@ Endpoint zwraca informację o ilości wystąpięń wielkich liter.
 {
   "big-letters": 0,
   "number-of-strings": 0,
-  "number-of-characters-in-string": 0
+  "number-of-characters-in-string": [0]
 }
 ```
 
@@ -38,7 +38,7 @@ Endpoint zwraca informację o ilości wystąpięń małych liter.
 {
   "small-letters": 0,
   "number-of-strings": 0,
-  "number-of-characters-in-string": 0
+  "number-of-characters-in-string": [0]
 }
 ```
 
@@ -51,7 +51,7 @@ Endpoint zwraca informację o ilości wystąpięń liczb w ciągu znaków.
 {
   "numbers": 0,
   "number-of-strings": 0,
-  "number-of-characters-in-string": 0
+  "number-of-characters-in-string": [0]
 }
 ```
 
@@ -64,7 +64,7 @@ Endpoint zwraca informację o ilości wystąpięń znaków specjalnych w ciągu 
 {
   "special-characters": 0,
   "number-of-strings": 0,
-  "number-of-characters-in-string": 0
+  "number-of-characters-in-string": [0]
 }
 ```
 
