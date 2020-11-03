@@ -5,12 +5,12 @@ INFO_MESSAGE: str = "Info: To get stats of message, use /*endpoint name*/*your m
 flask_app = Flask(__name__)
 
 
-def count_big_letters(text: str):
+def count_characters(text, condition):
     index, mark = 0, False
     temp_letters = [0]
 
     for c in text:
-        if c.isupper():
+        if condition(c):
             temp_letters[index] = temp_letters[index] + 1
             mark = True
         else:
@@ -27,6 +27,10 @@ def count_big_letters(text: str):
         "number-of-strings": len(letters),
         "number-of-characters-in-string": letters
     }
+
+
+def check_if_big_letter(c: str):
+    return c.isupper()
 
 
 def count_small_letters(text: str):
@@ -122,7 +126,7 @@ def big_letters(text: str):
     if text is None:
         abort(415)
 
-    return dumps(count_big_letters(text))
+    return dumps(count_characters(text, check_if_big_letter))
 
 
 @flask_app.route('/small-letters/<text>')
