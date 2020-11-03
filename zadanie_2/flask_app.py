@@ -21,7 +21,12 @@ def count_big_letters(text: str):
             temp_letters.append(0)
 
     letters = [c for c in temp_letters if c != 0]
-    return sum(letters), len(letters), letters
+
+    return {
+        "count": sum(letters),
+        "number-of-strings": len(letters),
+        "number-of-characters-in-string": letters
+    }
 
 
 def count_small_letters(text: str):
@@ -40,7 +45,12 @@ def count_small_letters(text: str):
             temp_letters.append(0)
 
     letters = [c for c in temp_letters if c != 0]
-    return sum(letters), len(letters), letters
+
+    return {
+        "count": sum(letters),
+        "number-of-strings": len(letters),
+        "number-of-characters-in-string": letters
+    }
 
 
 def count_numbers(text: str):
@@ -59,7 +69,12 @@ def count_numbers(text: str):
             temp_letters.append(0)
 
     letters = [c for c in temp_letters if c != 0]
-    return sum(letters), len(letters), letters
+
+    return {
+        "count": sum(letters),
+        "number-of-strings": len(letters),
+        "number-of-characters-in-string": letters
+    }
 
 
 def count_special_characters(text: str):
@@ -78,7 +93,12 @@ def count_special_characters(text: str):
             temp_letters.append(0)
 
     letters = [c for c in temp_letters if c != 0]
-    return sum(letters), len(letters), letters
+
+    return {
+        "count": sum(letters),
+        "number-of-strings": len(letters),
+        "number-of-characters-in-string": letters
+    }
 
 
 @flask_app.route('/')
@@ -102,13 +122,7 @@ def big_letters(text: str):
     if text is None:
         abort(415)
 
-    count, strings, number_of_characters_in_strings = count_big_letters(text)
-
-    return dumps({
-        "count": count,
-        "number-of-strings": strings,
-        "number-of-characters-in-string": number_of_characters_in_strings
-    })
+    return dumps(count_big_letters(text))
 
 
 @flask_app.route('/small-letters/<text>')
@@ -116,13 +130,7 @@ def small_letters(text: str):
     if text is None:
         abort(415)
 
-    count, strings, number_of_characters_in_strings = count_small_letters(text)
-
-    return dumps({
-        "count": count,
-        "number-of-strings": strings,
-        "number-of-characters-in-string": number_of_characters_in_strings
-    })
+    return dumps(count_small_letters(text))
 
 
 @flask_app.route('/numbers/<text>')
@@ -130,13 +138,7 @@ def numbers(text: str):
     if text is None:
         abort(415)
 
-    count, strings, number_of_characters_in_strings = count_numbers(text)
-
-    return dumps({
-        "count":  count,
-        "number-of-strings": strings,
-        "number-of-characters-in-string": number_of_characters_in_strings
-    })
+    return dumps(count_numbers(text))
 
 
 @flask_app.route('/special-characters/<text>')
@@ -144,13 +146,7 @@ def special_characters(text: str):
     if text is None:
         abort(415)
 
-    count, strings, number_of_characters_in_strings = count_special_characters(text)
-
-    return dumps({
-        "count": count,
-        "number-of-strings": strings,
-        "number-of-characters-in-string": number_of_characters_in_strings
-    })
+    return dumps(count_special_characters(text))
 
 
 @flask_app.route('/all-characters/<text>')
@@ -174,7 +170,7 @@ def all_characters(text: str):
         "number-of-strings": 0,
         "number-of-characters-in-string": [0]
       },
-      "special-charcters": {
+      "special-characters": {
         "count": 0,
         "number-of-strings": 0,
         "number-of-characters-in-string": [0]
