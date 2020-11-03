@@ -39,4 +39,14 @@ Endpoint zwraca informację o ilości wystąpięń małych liter.
 ```
 
 ### /numbers/\<text\>
+
+Endpoint zwraca informację o ilości wystąpięń liczb w ciągu znaków.
+
+<b>Przykładowa odpowiedź<b>:
+```json
+{
+  "numbers": 0
+}
+```
+
 ### /special-characters/\<text\>
