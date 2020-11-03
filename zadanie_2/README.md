@@ -49,7 +49,9 @@ Endpoint zwraca informację o ilości wystąpięń liczb w ciągu znaków.
 <b>Przykładowa odpowiedź<b>:
 ```json
 {
-  "numbers": 0
+  "numbers": 0,
+  "number-of-strings": 0,
+  "number-of-characters-in-string": 0
 }
 ```
 
