@@ -27,6 +27,12 @@ def main():
     return INFO_MESSAGE
 
 
+@flask_app.route('/<name>')
+@flask_app.route('/<name>/')
+def error(name: str):
+    abort(415)
+
+
 @flask_app.route('/health')
 def health():
     return ""
