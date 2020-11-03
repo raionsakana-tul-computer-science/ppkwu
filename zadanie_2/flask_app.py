@@ -9,6 +9,10 @@ def count_big_letters(text: str):
     return sum(1 for c in text if c.isupper())
 
 
+def count_small_letters(text: str):
+    return sum(1 for c in text if c.islower())
+
+
 @flask_app.route('/')
 def main():
     return INFO_MESSAGE
@@ -35,7 +39,7 @@ def small_letters(text: str):
         abort(415)
 
     return dumps({
-        "small-letters": sum(1 for c in text if c.islower())
+        "small-letters": count_small_letters(text)
     })
 
 
