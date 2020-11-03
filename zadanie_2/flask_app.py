@@ -5,6 +5,10 @@ INFO_MESSAGE: str = "Info: To get stats of message, use /*endpoint name*/*your m
 flask_app = Flask(__name__)
 
 
+def count_big_letters(text: str):
+    return sum(1 for c in text if c.isupper())
+
+
 @flask_app.route('/')
 def main():
     return INFO_MESSAGE
@@ -21,7 +25,7 @@ def big_letters(text: str):
         abort(415)
 
     return dumps({
-        "big-letters": sum(1 for c in text if c.isupper())
+        "big-letters": count_big_letters(text)
     })
 
 
