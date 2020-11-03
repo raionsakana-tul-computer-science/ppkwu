@@ -155,26 +155,10 @@ def all_characters(text: str):
         abort(415)
 
     return dumps({
-      "big-letters": {
-        "count": 0,
-        "number-of-strings": 0,
-        "number-of-characters-in-string": [0]
-      },
-      "small-letters": {
-        "count": 0,
-        "number-of-strings": 0,
-        "number-of-characters-in-string": [0]
-      },
-      "numbers": {
-        "count": 0,
-        "number-of-strings": 0,
-        "number-of-characters-in-string": [0]
-      },
-      "special-characters": {
-        "count": 0,
-        "number-of-strings": 0,
-        "number-of-characters-in-string": [0]
-      }
+      "big-letters": count_big_letters(text),
+      "small-letters": count_small_letters(text),
+      "numbers": count_numbers(text),
+      "special-characters": count_special_characters(text)
     })
 
 
