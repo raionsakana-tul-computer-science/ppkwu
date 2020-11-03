@@ -13,6 +13,10 @@ def count_small_letters(text: str):
     return sum(1 for c in text if c.islower())
 
 
+def count_numbers(text: str):
+    return sum(1 for c in text if c.isnumeric())
+
+
 @flask_app.route('/')
 def main():
     return INFO_MESSAGE
@@ -49,7 +53,7 @@ def numbers(text: str):
         abort(415)
 
     return dumps({
-        "numbers": sum(1 for c in text if c.isnumeric())
+        "numbers": count_numbers(text)
     })
 
 
