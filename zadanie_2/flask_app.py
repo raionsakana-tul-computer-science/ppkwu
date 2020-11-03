@@ -33,28 +33,8 @@ def check_if_big_letter(c: str):
     return c.isupper()
 
 
-def count_small_letters(text: str):
-    index, mark = 0, False
-    temp_letters = [0]
-
-    for c in text:
-        if c.islower():
-            temp_letters[index] = temp_letters[index] + 1
-            mark = True
-        else:
-            mark = False
-
-        if not mark:
-            index += 1
-            temp_letters.append(0)
-
-    letters = [c for c in temp_letters if c != 0]
-
-    return {
-        "count": sum(letters),
-        "number-of-strings": len(letters),
-        "number-of-characters-in-string": letters
-    }
+def check_if_small_letter(c: str):
+    return c.islower()
 
 
 def count_numbers(text: str):
@@ -134,7 +114,7 @@ def small_letters(text: str):
     if text is None:
         abort(415)
 
-    return dumps(count_small_letters(text))
+    return dumps(count_characters(text, check_if_small_letter))
 
 
 @flask_app.route('/numbers/<text>')
