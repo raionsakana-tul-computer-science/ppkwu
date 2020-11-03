@@ -17,6 +17,11 @@ def count_numbers(text: str):
     return sum(1 for c in text if c.isnumeric())
 
 
+def count_special_characters(text: str):
+    number_of_letters = sum((count_big_letters(text), count_small_letters(text)))
+    return len(text) - number_of_letters - count_numbers(text)
+
+
 @flask_app.route('/')
 def main():
     return INFO_MESSAGE
@@ -62,12 +67,8 @@ def special_characters(text: str):
     if text is None:
         abort(415)
 
-    number_of_letters = sum((count_big_letters(text), count_small_letters(text)))
-    number_of_numbers = count_numbers(text)
-    number_of_special_characters = len(text) - number_of_letters - number_of_numbers
-
     return dumps({
-        "special-characters": number_of_special_characters
+        "special-characters": count_special_characters(text)
     })
 
 
