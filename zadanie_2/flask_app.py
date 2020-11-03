@@ -6,7 +6,22 @@ flask_app = Flask(__name__)
 
 
 def count_big_letters(text: str):
-    return sum(1 for c in text if c.isupper())
+    index, mark = 0, False
+    temp_letters = [0]
+
+    for c in text:
+        if c.isupper():
+            temp_letters[index] = temp_letters[index] + 1
+            mark = True
+        else:
+            mark = False
+
+        if not mark:
+            index += 1
+            temp_letters.append(0)
+
+    letters = [c for c in temp_letters if c != 0]
+    return sum(letters), len(letters), letters
 
 
 def count_small_letters(text: str):
@@ -43,8 +58,12 @@ def big_letters(text: str):
     if text is None:
         abort(415)
 
+    count, strings, number_of_characters_in_strings = count_big_letters(text)
+
     return dumps({
-        "big-letters": count_big_letters(text)
+        "big-letters": count,
+        "number-of-strings": strings,
+        "number-of-characters-in-string": number_of_characters_in_strings
     })
 
 
