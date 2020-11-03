@@ -59,3 +59,7 @@ Endpoint zwraca informację o ilości wystąpięń znaków specjalnych w ciągu 
   "special-characters": 0
 }
 ```
+
+## NOT SUPPORTED ENDPOINT
+
+API zwraca kod błędu <b><i>415</i></b>.
