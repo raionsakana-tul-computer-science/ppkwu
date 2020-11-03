@@ -63,8 +63,22 @@ def count_numbers(text: str):
 
 
 def count_special_characters(text: str):
-    number_of_letters = sum((count_big_letters(text), count_small_letters(text)))
-    return len(text) - number_of_letters - count_numbers(text)
+    index, mark = 0, False
+    temp_letters = [0]
+
+    for c in text:
+        if not c.isnumeric() and not c.isupper() and not c.islower():
+            temp_letters[index] = temp_letters[index] + 1
+            mark = True
+        else:
+            mark = False
+
+        if not mark:
+            index += 1
+            temp_letters.append(0)
+
+    letters = [c for c in temp_letters if c != 0]
+    return sum(letters), len(letters), letters
 
 
 @flask_app.route('/')
@@ -130,8 +144,12 @@ def special_characters(text: str):
     if text is None:
         abort(415)
 
+    count, strings, number_of_characters_in_strings = count_special_characters(text)
+
     return dumps({
-        "special-characters": count_special_characters(text)
+        "special-characters": count,
+        "number-of-strings": strings,
+        "number-of-characters-in-string": number_of_characters_in_strings
     })
 
 
