@@ -9,10 +9,26 @@ Endpoint zwraca informację o ilości wystąpięń wszystkich obłsugiwanych zna
 <b>Przykładowa odpowiedź<b>:
 ```json
 {
-  "big-letters": 0,
-  "small-letters": 0,
-  "numbers": 0,
-  "special-characters": 0
+  "big-letters": {
+    "count": 0,
+    "number-of-strings": 0,
+    "number-of-characters-in-string": [0]
+  },
+  "small-letters": {
+    "count": 0,
+    "number-of-strings": 0,
+    "number-of-characters-in-string": [0]
+  },
+  "numbers": {
+    "count": 0,
+    "number-of-strings": 0,
+    "number-of-characters-in-string": [0]
+  },
+  "special-characters": {
+    "count": 0,
+    "number-of-strings": 0,
+    "number-of-characters-in-string": [0]
+  }
 }
 ```
 
@@ -23,7 +39,7 @@ Endpoint zwraca informację o ilości wystąpięń wielkich liter.
 <b>Przykładowa odpowiedź<b>:
 ```json
 {
-  "big-letters": 0,
+  "count": 0,
   "number-of-strings": 0,
   "number-of-characters-in-string": [0]
 }
@@ -36,7 +52,7 @@ Endpoint zwraca informację o ilości wystąpięń małych liter.
 <b>Przykładowa odpowiedź<b>:
 ```json
 {
-  "small-letters": 0,
+  "count": 0,
   "number-of-strings": 0,
   "number-of-characters-in-string": [0]
 }
@@ -49,7 +65,7 @@ Endpoint zwraca informację o ilości wystąpięń liczb w ciągu znaków.
 <b>Przykładowa odpowiedź<b>:
 ```json
 {
-  "numbers": 0,
+  "count": 0,
   "number-of-strings": 0,
   "number-of-characters-in-string": [0]
 }
@@ -62,7 +78,7 @@ Endpoint zwraca informację o ilości wystąpięń znaków specjalnych w ciągu 
 <b>Przykładowa odpowiedź<b>:
 ```json
 {
-  "special-characters": 0,
+  "count": 0,
   "number-of-strings": 0,
   "number-of-characters-in-string": [0]
 }
