@@ -57,5 +57,19 @@ def numbers(text: str):
     })
 
 
+@flask_app.route('/special-characters/<text>')
+def special_characters(text: str):
+    if text is None:
+        abort(415)
+
+    number_of_letters = sum((count_big_letters(text), count_small_letters(text)))
+    number_of_numbers = count_numbers(text)
+    number_of_special_characters = len(text) - number_of_letters - number_of_numbers
+
+    return dumps({
+        "special-characters": number_of_special_characters
+    })
+
+
 if __name__ == '__main__':
     flask_app.run(host='127.0.0.1', port=80)
