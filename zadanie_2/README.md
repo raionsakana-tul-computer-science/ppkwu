@@ -17,6 +17,16 @@ Endpoint zwraca informację o ilości wystąpięń wszystkich obłsugiwanych zna
 ```
 
 ### /big-letters/\<text\>
+
+Endpoint zwraca informację o ilości wystąpięń wielkich liter.
+
+<b>Przykładowa odpowiedź<b>:
+```json
+{
+  "big-letters": 0,
+}
+```
+
 ### /small-letters/\<text\>
 ### /numbers/\<text\>
 ### /special-characters/\<text\>
