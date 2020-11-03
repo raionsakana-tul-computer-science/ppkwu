@@ -105,7 +105,7 @@ def big_letters(text: str):
     count, strings, number_of_characters_in_strings = count_big_letters(text)
 
     return dumps({
-        "big-letters": count,
+        "count": count,
         "number-of-strings": strings,
         "number-of-characters-in-string": number_of_characters_in_strings
     })
@@ -119,7 +119,7 @@ def small_letters(text: str):
     count, strings, number_of_characters_in_strings = count_small_letters(text)
 
     return dumps({
-        "small-letters": count,
+        "count": count,
         "number-of-strings": strings,
         "number-of-characters-in-string": number_of_characters_in_strings
     })
@@ -133,7 +133,7 @@ def numbers(text: str):
     count, strings, number_of_characters_in_strings = count_numbers(text)
 
     return dumps({
-        "numbers":  count,
+        "count":  count,
         "number-of-strings": strings,
         "number-of-characters-in-string": number_of_characters_in_strings
     })
@@ -147,7 +147,7 @@ def special_characters(text: str):
     count, strings, number_of_characters_in_strings = count_special_characters(text)
 
     return dumps({
-        "special-characters": count,
+        "count": count,
         "number-of-strings": strings,
         "number-of-characters-in-string": number_of_characters_in_strings
     })
@@ -159,10 +159,26 @@ def all_characters(text: str):
         abort(415)
 
     return dumps({
-        "big-letters": count_big_letters(text),
-        "small-letters": count_small_letters(text),
-        "numbers": count_numbers(text),
-        "special-characters": count_special_characters(text)
+      "big-letters": {
+        "count": 0,
+        "number-of-strings": 0,
+        "number-of-characters-in-string": [0]
+      },
+      "small-letters": {
+        "count": 0,
+        "number-of-strings": 0,
+        "number-of-characters-in-string": [0]
+      },
+      "numbers": {
+        "count": 0,
+        "number-of-strings": 0,
+        "number-of-characters-in-string": [0]
+      },
+      "special-charcters": {
+        "count": 0,
+        "number-of-strings": 0,
+        "number-of-characters-in-string": [0]
+      }
     })
 
 
