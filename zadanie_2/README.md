@@ -23,10 +23,20 @@ Endpoint zwraca informację o ilości wystąpięń wielkich liter.
 <b>Przykładowa odpowiedź<b>:
 ```json
 {
-  "big-letters": 0,
+  "big-letters": 0
 }
 ```
 
 ### /small-letters/\<text\>
+
+Endpoint zwraca informację o ilości wystąpięń małych liter.
+
+<b>Przykładowa odpowiedź<b>:
+```json
+{
+  "small-letters": 0
+}
+```
+
 ### /numbers/\<text\>
 ### /special-characters/\<text\>
