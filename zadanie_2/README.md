@@ -23,7 +23,9 @@ Endpoint zwraca informację o ilości wystąpięń wielkich liter.
 <b>Przykładowa odpowiedź<b>:
 ```json
 {
-  "big-letters": 0
+  "big-letters": 0,
+  "number-of-strings": 0,
+  "number-of-characters-in-string": 0
 }
 ```
 
