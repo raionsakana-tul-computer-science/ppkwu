@@ -41,28 +41,8 @@ def check_if_number(c: str):
     return c.isnumeric()
 
 
-def count_special_characters(text: str):
-    index, mark = 0, False
-    temp_letters = [0]
-
-    for c in text:
-        if not c.isnumeric() and not c.isupper() and not c.islower():
-            temp_letters[index] = temp_letters[index] + 1
-            mark = True
-        else:
-            mark = False
-
-        if not mark:
-            index += 1
-            temp_letters.append(0)
-
-    letters = [c for c in temp_letters if c != 0]
-
-    return {
-        "count": sum(letters),
-        "number-of-strings": len(letters),
-        "number-of-characters-in-string": letters
-    }
+def check_if_special_character(c: str):
+    return not c.isnumeric() and not c.isupper() and not c.islower()
 
 
 @flask_app.route('/')
@@ -110,7 +90,7 @@ def special_characters(text: str):
     if text is None:
         abort(415)
 
-    return dumps(count_special_characters(text))
+    return dumps(count_characters(text, check_if_special_character))
 
 
 @flask_app.route('/all-characters/<text>')
