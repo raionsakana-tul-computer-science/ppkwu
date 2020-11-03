@@ -99,10 +99,10 @@ def all_characters(text: str):
         abort(415)
 
     return dumps({
-      "big-letters": count_big_letters(text),
-      "small-letters": count_small_letters(text),
-      "numbers": count_numbers(text),
-      "special-characters": count_special_characters(text)
+      "big-letters": count_characters(text, check_if_big_letter),
+      "small-letters": count_characters(text, check_if_small_letter),
+      "numbers": count_characters(text, check_if_number),
+      "special-characters": count_characters(text, check_if_special_character)
     })
 
 
