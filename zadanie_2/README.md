@@ -2,7 +2,7 @@
 
 ## GET (metoda)
 
-### /all-charactes/\<text\>
+### /all-characters/\<text\>
 
 Endpoint zwraca informację o ilości wystąpięń wszystkich obłsugiwanych znaków.
 

@@ -72,5 +72,18 @@ def special_characters(text: str):
     })
 
 
+@flask_app.route('/all-characters/<text>')
+def all_characters(text: str):
+    if text is None:
+        abort(415)
+
+    return dumps({
+        "big-letters": count_big_letters(text),
+        "small-letters": count_small_letters(text),
+        "numbers": count_numbers(text),
+        "special-characters": count_special_characters(text)
+    })
+
+
 if __name__ == '__main__':
     flask_app.run(host='127.0.0.1', port=80)
