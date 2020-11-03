@@ -4,7 +4,7 @@
 
 ### /all-characters/\<text\>
 
-Endpoint zwraca informację o ilości wystąpięń wszystkich obłsugiwanych znaków.
+Endpoint zwraca informację o ilości wystąpięń wszystkich obłsugiwanych znaków, liczbie ciągów takich znaków i listę zwierającej ilość znaków w ciągach.
 
 <b>Przykładowa odpowiedź<b>:
 ```json
@@ -34,7 +34,7 @@ Endpoint zwraca informację o ilości wystąpięń wszystkich obłsugiwanych zna
 
 ### /big-letters/\<text\>
 
-Endpoint zwraca informację o ilości wystąpięń wielkich liter.
+Endpoint zwraca informację o ilości wystąpięń wielkich liter, liczbie ciągów takich znaków i listę zwierającej ilość znaków w ciągach.
 
 <b>Przykładowa odpowiedź<b>:
 ```json
@@ -47,7 +47,7 @@ Endpoint zwraca informację o ilości wystąpięń wielkich liter.
 
 ### /small-letters/\<text\>
 
-Endpoint zwraca informację o ilości wystąpięń małych liter.
+Endpoint zwraca informację o ilości wystąpięń małych liter, liczbie ciągów takich znaków i listę zwierającej ilość znaków w ciągach.
 
 <b>Przykładowa odpowiedź<b>:
 ```json
@@ -60,7 +60,7 @@ Endpoint zwraca informację o ilości wystąpięń małych liter.
 
 ### /numbers/\<text\>
 
-Endpoint zwraca informację o ilości wystąpięń liczb w ciągu znaków.
+Endpoint zwraca informację o ilości wystąpięń liczb w ciągu znaków, liczbie ciągów takich znaków i listę zwierającej ilość znaków w ciągach.
 
 <b>Przykładowa odpowiedź<b>:
 ```json
@@ -73,7 +73,7 @@ Endpoint zwraca informację o ilości wystąpięń liczb w ciągu znaków.
 
 ### /special-characters/\<text\>
 
-Endpoint zwraca informację o ilości wystąpięń znaków specjalnych w ciągu znaków.
+Endpoint zwraca informację o ilości wystąpięń znaków specjalnych w ciągu znaków, liczbie ciągów takich znaków i listę zwierającej ilość znaków w ciągach.
 
 <b>Przykładowa odpowiedź<b>:
 ```json

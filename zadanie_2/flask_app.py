@@ -1,6 +1,5 @@
 from typing import Callable, Dict
 from flask import Flask, abort
-
 from json import dumps
 
 INFO_MESSAGE: str = "Info: To get stats of message, use /*endpoint name*/*your message*"
