@@ -50,3 +50,12 @@ Endpoint zwraca informację o ilości wystąpięń liczb w ciągu znaków.
 ```
 
 ### /special-characters/\<text\>
+
+Endpoint zwraca informację o ilości wystąpięń znaków specjalnych w ciągu znaków.
+
+<b>Przykładowa odpowiedź<b>:
+```json
+{
+  "special-characters": 0
+}
+```
