@@ -16,7 +16,7 @@ class CalendarHandler:
     def get_calendar(self, year: str, month: str):
         if self._validate(year, month):
             events = self._get_events(self._get_calendar_url(year, month))
-            return ""
+            return str(events)
 
         return self._VALIDATION_ERROR
 
@@ -26,8 +26,11 @@ class CalendarHandler:
         soup_page = BeautifulSoup(get(url).content, self._PARSER_TYPE)
         soup_page_list = soup_page.find_all('td', class_='active')
 
-        for i in soup_page_list:
-            print(i)
+        for soup_page_element in soup_page_list:
+            soup_date = BeautifulSoup(str(soup_page_element), self._PARSER_TYPE)
+            date = soup_date.find('a').get_text()
+            event = soup_date.find('div').get_text()
+            events[int(date)] = str(event)
 
         return events
 
