@@ -5,6 +5,14 @@ INFO_MESSAGE: str = "Info: zadanie_3"
 flask_app = Flask(__name__)
 
 
+class Calendar:
+    CALENDAR_URL: str = "http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php"
+
+    @staticmethod
+    def get_calendar(year: str, month: str):
+        pass
+
+
 @flask_app.route('/')
 def main():
     return INFO_MESSAGE
