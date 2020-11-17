@@ -11,9 +11,12 @@ class Calendar:
 
     def get_calendar(self, year: str, month: str):
         if self._validate(year, month):
-            return self.CALENDAR_URL % f"rok={year}&miesiac={month}"
+            return self._get_calendar_url(year, month)
 
         return self.VALIDATION_ERROR
+
+    def _get_calendar_url(self, year: str, month: str) -> str:
+        return self.CALENDAR_URL % f"rok={year}&miesiac={month}"
 
     def _validate(self, year: str, month: str) -> bool:
         try:
