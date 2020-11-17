@@ -6,11 +6,11 @@ flask_app = Flask(__name__)
 
 
 class Calendar:
-    CALENDAR_URL: str = "http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php"
+    CALENDAR_URL: str = "http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?%s&lang=1"
 
     @staticmethod
-    def get_calendar(year: str, month: str):
-        pass
+    def get_calendar(self, year: str, month: str):
+        return self.CALENDAR_URL % f"rok={year}&miesiac={month}&lang=1"
 
 
 @flask_app.route('/')
