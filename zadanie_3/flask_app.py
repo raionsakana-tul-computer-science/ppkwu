@@ -3,26 +3,26 @@ from flask import Flask, abort
 
 
 class Calendar:
-    VALIDATION_ERROR: str = "ERROR, given year or month is not correct data, please, check out and try again."
-    CALENDAR_URL: str = "http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?%s&lang=1"
+    _VALIDATION_ERROR: str = "ERROR, given year or month is not correct data, please, check out and try again."
+    _CALENDAR_URL: str = "http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?%s&lang=1"
 
-    JANUARY: int = 1
-    DECEMBER: int = 12
+    _JANUARY: int = 1
+    _DECEMBER: int = 12
 
     def get_calendar(self, year: str, month: str):
         if self._validate(year, month):
             return self._get_calendar_url(year, month)
 
-        return self.VALIDATION_ERROR
+        return self._VALIDATION_ERROR
 
     def _get_calendar_url(self, year: str, month: str) -> str:
-        return self.CALENDAR_URL % f"rok={year}&miesiac={month}"
+        return self._CALENDAR_URL % f"rok={year}&miesiac={month}"
 
     def _validate(self, year: str, month: str) -> bool:
         try:
             int(year)
             month = int(month)
-            return self.JANUARY <= month <= self.DECEMBER
+            return self._JANUARY <= month <= self._DECEMBER
         except ValueError:
             pass
 
