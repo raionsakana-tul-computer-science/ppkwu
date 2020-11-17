@@ -2,87 +2,17 @@
 
 ## GET (metoda)
 
-### /all-characters/\<text\>
+### /calendar/\<year\>/\<month\>
 
-Endpoint zwraca informację o ilości wystąpięń wszystkich obłsugiwanych znaków, liczbie ciągów takich znaków i listę zwierającej ilość znaków w ciągach.
+Endpoint zwraca plik iCalendar dla podanego miesiąca oraz roku. 
 
-<b>Przykładowa odpowiedź<b>:
-```json
-{
-  "big-letters": {
-    "count": 0,
-    "number-of-strings": 0,
-    "number-of-characters-in-string": [0]
-  },
-  "small-letters": {
-    "count": 0,
-    "number-of-strings": 0,
-    "number-of-characters-in-string": [0]
-  },
-  "numbers": {
-    "count": 0,
-    "number-of-strings": 0,
-    "number-of-characters-in-string": [0]
-  },
-  "special-characters": {
-    "count": 0,
-    "number-of-strings": 0,
-    "number-of-characters-in-string": [0]
-  }
-}
-```
+#### Parametry:
+<b>year</b>: rok, dla któego pobieramy kalendarz, <i>typ: liczba całkowita</i>
+<b>month</b>: miesiąc, dla któego pobieramy kalendarz, <i>typ: liczba całkowita, zakres: \<1-12\></i>
 
-### /big-letters/\<text\>
+<b>Przykładowa odpowiedź</b>: 
 
-Endpoint zwraca informację o ilości wystąpięń wielkich liter, liczbie ciągów takich znaków i listę zwierającej ilość znaków w ciągach.
-
-<b>Przykładowa odpowiedź<b>:
-```json
-{
-  "count": 0,
-  "number-of-strings": 0,
-  "number-of-characters-in-string": [0]
-}
-```
-
-### /small-letters/\<text\>
-
-Endpoint zwraca informację o ilości wystąpięń małych liter, liczbie ciągów takich znaków i listę zwierającej ilość znaków w ciągach.
-
-<b>Przykładowa odpowiedź<b>:
-```json
-{
-  "count": 0,
-  "number-of-strings": 0,
-  "number-of-characters-in-string": [0]
-}
-```
-
-### /numbers/\<text\>
-
-Endpoint zwraca informację o ilości wystąpięń liczb w ciągu znaków, liczbie ciągów takich znaków i listę zwierającej ilość znaków w ciągach.
-
-<b>Przykładowa odpowiedź<b>:
-```json
-{
-  "count": 0,
-  "number-of-strings": 0,
-  "number-of-characters-in-string": [0]
-}
-```
-
-### /special-characters/\<text\>
-
-Endpoint zwraca informację o ilości wystąpięń znaków specjalnych w ciągu znaków, liczbie ciągów takich znaków i listę zwierającej ilość znaków w ciągach.
-
-<b>Przykładowa odpowiedź<b>:
-```json
-{
-  "count": 0,
-  "number-of-strings": 0,
-  "number-of-characters-in-string": [0]
-}
-```
+Plik w formacie .ics, format nazwy: weeia_\<year\>_\<month\>.ics, przykład: weeia_2020_10.ics
 
 ## NOT SUPPORTED ENDPOINT
 
