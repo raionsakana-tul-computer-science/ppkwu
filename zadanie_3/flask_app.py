@@ -23,33 +23,35 @@ class CalendarHandler:
 
     def get_calendar(self, year: str, month: str):
         if self._validate(year, month):
-            cal = Calendar()
-            cal.add('prodid', f'-//WEEIA calendar {self._get_month(month)}-{year}//mxm.dk//')
-            cal.add('version', '2.0')
-
-            events = self._get_events(self._get_calendar_url(year, month))
-
-            for key, value in events.items():
-                event = Event()
-                date = self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 0, 0, 0))
-
-                event.add('summary', value)
-                event.add('dtstart', date)
-
-                event.add('dtend', self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 23, 59, 0)))
-                event.add('dtstamp', self._TIMEZONE.localize(datetime.now()))
-
-                event['uid'] = f'{date.strftime(self._FORMAT)}@mxm.dk'
-
-                cal.add_component(event)
-
-            f = open('example.ics', 'wb')
-            f.write(cal.to_ical())
-            f.close()
-
-            return str(events)
+            return self._fill_calendar(month, year)
 
         return self._VALIDATION_ERROR
+
+    def _fill_calendar(self, month, year):
+        cal = self._get_calendar(month, year)
+        events = self._get_events(self._get_calendar_url(year, month))
+
+        for key, value in events.items():
+            event = self._set_event_to_calendar(key, month, value, year)
+            cal.add_component(event)
+
+        return str(cal.to_ical())
+
+    def _set_event_to_calendar(self, key, month, value, year):
+        event = Event()
+        date = self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 0, 0, 0))
+        event.add('summary', value)
+        event.add('dtstart', date)
+        event.add('dtend', self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 23, 59, 0)))
+        event.add('dtstamp', self._TIMEZONE.localize(datetime.now()))
+        event['uid'] = f'{date.strftime(self._FORMAT)}@mxm.dk'
+        return event
+
+    def _get_calendar(self, month, year):
+        cal = Calendar()
+        cal.add('prodid', f'-//WEEIA calendar {self._get_month(month)}-{year}//mxm.dk//')
+        cal.add('version', '2.0')
+        return cal
 
     def _get_events(self, url: str) -> Dict[int, str]:
         events = {}
