@@ -4,6 +4,10 @@ from requests import get
 from bs4 import BeautifulSoup
 from flask import Flask
 
+from icalendar import Calendar, Event
+from datetime import datetime
+from pytz import timezone
+
 
 class CalendarHandler:
     _VALIDATION_ERROR: str = "ERROR, given year or month is not correct data, please, check out and try again."
@@ -14,9 +18,35 @@ class CalendarHandler:
     _DECEMBER: int = 12
     _SIZE: int = 2
 
+    _TIMEZONE = timezone("Europe/Warsaw")
+    _FORMAT = "%Y-%m-%d_%H:%M:%S_%Z%z"
+
     def get_calendar(self, year: str, month: str):
         if self._validate(year, month):
+            cal = Calendar()
+            cal.add('prodid', f'-//WEEIA calendar {self._get_month(month)}-{year}//mxm.dk//')
+            cal.add('version', '2.0')
+
             events = self._get_events(self._get_calendar_url(year, month))
+
+            for key, value in events.items():
+                event = Event()
+                date = self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 0, 0, 0))
+
+                event.add('summary', value)
+                event.add('dtstart', date)
+
+                event.add('dtend', self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 23, 59, 0)))
+                event.add('dtstamp', self._TIMEZONE.localize(datetime.now()))
+
+                event['uid'] = f'{date.strftime(self._FORMAT)}@mxm.dk'
+
+                cal.add_component(event)
+
+            f = open('example.ics', 'wb')
+            f.write(cal.to_ical())
+            f.close()
+
             return str(events)
 
         return self._VALIDATION_ERROR
