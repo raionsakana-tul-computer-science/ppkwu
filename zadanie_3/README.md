@@ -14,6 +14,16 @@ Endpoint zwraca plik iCalendar dla podanego miesiąca oraz roku.
 
 Plik w formacie .ics, format nazwy: weeia_\<year\>_\<month\>.ics, przykład: weeia_2020_10.ics
 
+### /calendar
+
+Endpoint zwraca plik iCalendar dla aktualnego miesiąca oraz roku. 
+
+<b>Przykładowa odpowiedź</b>: 
+
+Plik w formacie .ics, format nazwy: weeia_\<year\>_\<month\>.ics, przykład: weeia_2020_10.ics
+
+
+
 ## NOT SUPPORTED ENDPOINT
 
 API zwraca kod błędu <b><i>415</i></b>.
