@@ -104,5 +104,10 @@ def get_calendar(year: str, month: str):
     return calendar.get_calendar(year, month)
 
 
+@flask_app.route('/calendar')
+def get_current_calendar():
+    return calendar.get_calendar(str(datetime.now().year), str(datetime.now().month))
+
+
 if __name__ == '__main__':
     flask_app.run(host='127.0.0.1', port=80)
