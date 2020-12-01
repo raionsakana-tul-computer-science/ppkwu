@@ -32,7 +32,7 @@ class CalendarHandler:
                 }
             )
 
-        return Response(self._VALIDATION_ERROR)
+        return Response(self._VALIDATION_ERROR, 404)
 
     def _fill_calendar(self, month: str, year: str) -> bytes:
         cal = self._get_calendar(month, year)
@@ -45,14 +45,22 @@ class CalendarHandler:
         return cal.to_ical()
 
     def _set_event_to_calendar(self, key: int, month: str, value: str, year: str) -> Event:
+        date_now, date_start_event, date_stop_event = self._get_dates(key, month, year)
+
         event = Event()
-        date = self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 0, 0, 0))
         event.add('summary', value)
-        event.add('dtstart', date)
-        event.add('dtend', self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 23, 59, 0)))
-        event.add('dtstamp', self._TIMEZONE.localize(datetime.now()))
-        event['uid'] = f'{date.strftime(self._FORMAT)}@mxm.dk'
+        event.add('dtstart', date_start_event)
+        event.add('dtend', date_stop_event)
+        event.add('dtstamp', date_now)
+
+        event['uid'] = f'{date_start_event.strftime(self._FORMAT)}@mxm.dk'
         return event
+
+    def _get_dates(self, key, month, year):
+        date_start_event = self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 0, 0, 0))
+        date_stop_event = self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 23, 59, 0))
+        date_now = self._TIMEZONE.localize(datetime.now())
+        return date_now, date_start_event, date_stop_event
 
     def _get_calendar(self, month: str, year: str) -> Calendar:
         cal = Calendar()
