@@ -2,7 +2,7 @@ from typing import Dict
 
 from requests import get
 from bs4 import BeautifulSoup
-from flask import Flask
+from flask import Flask, Response
 
 from icalendar import Calendar, Event
 from datetime import datetime
@@ -21,13 +21,20 @@ class CalendarHandler:
     _TIMEZONE = timezone("Europe/Warsaw")
     _FORMAT = "%Y-%m-%d_%H:%M:%S_%Z%z"
 
-    def get_calendar(self, year: str, month: str):
+    def get_calendar(self, year: str, month: str) -> Response:
         if self._validate(year, month):
-            return self._fill_calendar(month, year)
+            return Response(
+                self._fill_calendar(month, year),
+                mimetype="text/plain",
+                headers={
+                    "Content-Disposition":
+                    f"attachment;filename=weeia_{year}_{self._get_month(month)}.ics"
+                }
+            )
 
-        return self._VALIDATION_ERROR
+        return Response(self._VALIDATION_ERROR)
 
-    def _fill_calendar(self, month, year):
+    def _fill_calendar(self, month: str, year: str) -> bytes:
         cal = self._get_calendar(month, year)
         events = self._get_events(self._get_calendar_url(year, month))
 
@@ -35,9 +42,9 @@ class CalendarHandler:
             event = self._set_event_to_calendar(key, month, value, year)
             cal.add_component(event)
 
-        return str(cal.to_ical())
+        return cal.to_ical()
 
-    def _set_event_to_calendar(self, key, month, value, year):
+    def _set_event_to_calendar(self, key: int, month: str, value: str, year: str) -> Event:
         event = Event()
         date = self._TIMEZONE.localize(datetime(int(year), int(month), int(key), 0, 0, 0))
         event.add('summary', value)
@@ -47,7 +54,7 @@ class CalendarHandler:
         event['uid'] = f'{date.strftime(self._FORMAT)}@mxm.dk'
         return event
 
-    def _get_calendar(self, month, year):
+    def _get_calendar(self, month: str, year: str) -> Calendar:
         cal = Calendar()
         cal.add('prodid', f'-//WEEIA calendar {self._get_month(month)}-{year}//mxm.dk//')
         cal.add('version', '2.0')
@@ -70,7 +77,7 @@ class CalendarHandler:
     def _get_calendar_url(self, year: str, month: str) -> str:
         return self._CALENDAR_URL % f"rok={year}&miesiac={self._get_month(month)}"
 
-    def _get_month(self, month):
+    def _get_month(self, month) -> str:
         return month if len(month) == self._SIZE else f'0{month}'
 
     def _validate(self, year: str, month: str) -> bool:
