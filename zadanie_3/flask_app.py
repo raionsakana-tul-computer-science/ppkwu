@@ -12,6 +12,7 @@ class CalendarHandler:
 
     _JANUARY: int = 1
     _DECEMBER: int = 12
+    _SIZE: int = 2
 
     def get_calendar(self, year: str, month: str):
         if self._validate(year, month):
@@ -35,7 +36,10 @@ class CalendarHandler:
         return events
 
     def _get_calendar_url(self, year: str, month: str) -> str:
-        return self._CALENDAR_URL % f"rok={year}&miesiac={month}"
+        return self._CALENDAR_URL % f"rok={year}&miesiac={self._get_month(month)}"
+
+    def _get_month(self, month):
+        return month if len(month) == self._SIZE else f'0{month}'
 
     def _validate(self, year: str, month: str) -> bool:
         try:
