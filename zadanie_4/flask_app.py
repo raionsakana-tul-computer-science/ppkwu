@@ -99,9 +99,26 @@ from pytz import timezone
 #         return False
 
 
+class SearchEngine:
+    _URL: str = "https://panoramafirm.pl/szukaj?k="
+    _PARSER_TYPE: str = "html.parser"
+
+    def search(self, searching_key):
+        return self._get_data(self._get_url(searching_key))
+
+    def _get_data(self, url: str):
+        # soup_page = BeautifulSoup(get(url).content, self._PARSER_TYPE)
+        # soup_page_list = soup_page.find_all('td', class_='active')
+
+        return url
+
+    def _get_url(self, searching_key: str):
+        return f"{self._URL}{searching_key}"
+
+
 TITLE = "Zadanie 4"
 flask_app = Flask(__name__)
-# calendar = CalendarHandler()
+search_engine = SearchEngine()
 
 
 @flask_app.route('/')
@@ -114,13 +131,13 @@ def search():
     if request.method == 'POST':
         data = request.form
 
-        return render_template("index.html", title=TITLE, content=data.get('searching_key'))
+        return render_template("index.html", title=TITLE, content=search_engine.search(data.get('searching_key')))
     return redirect('/')
 
 
 @flask_app.route('/health')
 def health():
-    return ""
+    return Response("", 200)
 
 
 if __name__ == '__main__':
