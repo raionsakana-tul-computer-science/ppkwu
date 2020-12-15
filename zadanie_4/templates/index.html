@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <form action="/search" method="post">
+        <label for="searching_key">Produkt/firma/usługa:</label>
+        <input type="text" id="searching_key" name="searching_key"><br>
+
+        <input type="submit" value="Szukaj">
+    </form>
+    <br><br>
+    {{ content }}
+</body>
+</html>
