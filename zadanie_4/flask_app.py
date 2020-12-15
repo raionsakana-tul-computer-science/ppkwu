@@ -107,10 +107,18 @@ class SearchEngine:
         return self._get_data(self._get_url(searching_key))
 
     def _get_data(self, url: str):
-        # soup_page = BeautifulSoup(get(url).content, self._PARSER_TYPE)
-        # soup_page_list = soup_page.find_all('td', class_='active')
+        list_ = []
+        list_append = list_.append
 
-        return url
+        soup_page = BeautifulSoup(get(url).content, self._PARSER_TYPE)
+        soup_page_list = soup_page.find_all('td', class_='li')
+
+        for item in soup_page_list:
+            print(item)
+            soup_page = BeautifulSoup(str(item), self._PARSER_TYPE)
+            list_append(soup_page)
+
+        return str(soup_page)
 
     def _get_url(self, searching_key: str):
         return f"{self._URL}{searching_key}"
@@ -126,7 +134,7 @@ def main():
     return render_template("index.html", title=TITLE)
 
 
-@flask_app.route('/search', methods=['POST'])
+@flask_app.route('/search', methods=['POST', 'GET'])
 def search():
     if request.method == 'POST':
         data = request.form
