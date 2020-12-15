@@ -100,14 +100,13 @@ from pytz import timezone
 
 
 TITLE = "Zadanie 4"
-INFO_MESSAGE: str = f"Info: {TITLE}"
 flask_app = Flask(__name__)
 # calendar = CalendarHandler()
 
 
 @flask_app.route('/')
 def main():
-    return render_template("index.html", title="Zadanie 4", content=INFO_MESSAGE)
+    return render_template("index.html", title=TITLE)
 
 
 @flask_app.route('/search', methods=['POST'])
@@ -115,23 +114,13 @@ def search():
     if request.method == 'POST':
         data = request.form
 
-        return render_template("index.html", title="Zadanie 4", content=data.get('searching_key'))
+        return render_template("index.html", title=TITLE, content=data.get('searching_key'))
     return redirect('/')
 
 
 @flask_app.route('/health')
 def health():
     return ""
-
-
-# @flask_app.route('/calendar/<year>/<month>')
-# def get_calendar(year: str, month: str):
-#     return calendar.get_calendar(year, month)
-#
-#
-# @flask_app.route('/calendar')
-# def get_current_calendar():
-#     return calendar.get_calendar(str(datetime.now().year), str(datetime.now().month))
 
 
 if __name__ == '__main__':
