@@ -4,6 +4,8 @@ from flask import Flask, Response, render_template, request, redirect
 
 
 class Company:
+    _PATH: str = "files"
+
     def __init__(self,
                  name: str = None,
                  mail: str = None,
@@ -17,6 +19,8 @@ class Company:
         self._number = number
         self._page = page
 
+        self._save_v_card(self._generate_v_card())
+
     def _generate_v_card(self):
         return "BEGIN:VCARD\n" \
                "VERSION:4.0\n" \
@@ -27,6 +31,12 @@ class Company:
                f"URL:{self._page}\n" \
                "END:VCARD"
 
+    def _save_v_card(self, v_card: str):
+        with open(f"{self._PATH}/{self._get_filename()}.vcf", "w", encoding="utf-8") as f:
+            f.write(v_card)
+
+    def _get_filename(self):
+        return self.name.replace(' ', '')
 
 
 class SearchEngine:
