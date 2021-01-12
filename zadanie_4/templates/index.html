@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="pl>
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-    <form action="/search" method="post">
-        <label for="searching_key">Produkt/firma/usługa:</label>
-        <input type="text" id="searching_key" name="searching_key"><br>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        <form action="/search" method="post">
+            <label for="searching_key">Produkt/firma/usługa:</label>
+            <input type="text" id="searching_key" name="searching_key"><br>
 
-        <input type="submit" value="Szukaj">
-    </form>
-    <ul>
-    {% for company in companies %}
-        <li>{{ company.name }}</li>
-    {% endfor %}
-    </ul>
-
-
-    {{ content }}
-</body>
+            <input type="submit" value="Szukaj">
+        </form>
+        {% if companies != null %}
+        <h1>Znalezione firmy:</h1>
+        <ul>
+        {% for company in companies %}
+            <li>{{ company.name }}, pobierz <a href="/get_v_card/{{ company.name }}">vCard</a></li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    </body>
 </html>
