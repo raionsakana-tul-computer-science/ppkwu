@@ -13,9 +13,9 @@
         </form>
         {% if companies != null %}
         <h1>Znalezione firmy:</h1>
-        <ul>
+        <ul style="list-style: none">
         {% for company in companies %}
-            <li>{{ company.name }}, pobierz <a href="/get_v_card/{{ company.name }}">vCard</a></li>
+            <li style="background: antiquewhite; margin: 5px; padding: 20px">{{ company.name }}, pobierz <a href="/get_v_card/{{ company.name }}">vCard</a></li>
         {% endfor %}
         </ul>
         {% endif %}
