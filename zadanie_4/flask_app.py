@@ -17,6 +17,17 @@ class Company:
         self._number = number
         self._page = page
 
+    def _generate_v_card(self):
+        return "BEGIN:VCARD\n" \
+               "VERSION:4.0\n" \
+               f"ORG:{self.name}\n" \
+               f"TEL;TYPE=work;VALUE=uri:tel:+48 {self._number}\n" \
+               f"EMAIL:{self._mail}\n" \
+               f"ADR;TYPE=WORK;LABEL=\"{self._address}\"\n" \
+               f"URL:{self._page}\n" \
+               "END:VCARD"
+
+
 
 class SearchEngine:
     LINK_TAG = "a"
