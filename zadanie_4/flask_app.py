@@ -45,6 +45,9 @@ class SearchEngine:
 
         return companies
 
+    def _get_url(self, searching_key: str):
+        return f"{self._URL}{searching_key}"
+
     @staticmethod
     def set_company(soup_page):
         return Company(SearchEngine.find_data(soup_page, SearchEngine.LINK_TAG, "company-name").get_text().strip(),
@@ -57,9 +60,6 @@ class SearchEngine:
     @staticmethod
     def find_data(soup_page, tag: str, key: str):
         return soup_page.find(tag, class_=key)
-
-    def _get_url(self, searching_key: str):
-        return f"{self._URL}{searching_key}"
 
 
 TITLE = "Zadanie 4"
