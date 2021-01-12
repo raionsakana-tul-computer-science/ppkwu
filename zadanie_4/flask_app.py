@@ -3,7 +3,25 @@ from bs4 import BeautifulSoup
 from flask import Flask, Response, render_template, request, redirect
 
 
+class Company:
+    def __init__(self,
+                 name: str = None,
+                 mail: str = None,
+                 address: str = None,
+                 number: str = None,
+                 page: str = None
+                 ):
+        self.name = name
+        self._mail = mail
+        self._address = address
+        self._number = number
+        self._page = page
+
+
 class SearchEngine:
+    LINK_TAG = "a"
+    DIV_TAG = "div"
+
     _URL: str = "https://panoramafirm.pl/szukaj?k="
     _PARSER_TYPE: str = "html.parser"
 
@@ -11,18 +29,34 @@ class SearchEngine:
         return self._get_data(self._get_url(searching_key))
 
     def _get_data(self, url: str):
-        list_ = []
-        list_append = list_.append
+        companies = []
+        companies_append = companies.append
 
         soup_page = BeautifulSoup(get(url).content, self._PARSER_TYPE)
-        soup_page_list = soup_page.find_all('td', class_='li')
+        soup_page_list = soup_page.find_all('li', class_='company-item')
 
         for item in soup_page_list:
-            print(item)
             soup_page = BeautifulSoup(str(item), self._PARSER_TYPE)
-            list_append(soup_page)
 
-        return str(soup_page)
+            try:
+                companies_append(self.set_company(soup_page))
+            except:
+                pass
+
+        return companies
+
+    @staticmethod
+    def set_company(soup_page):
+        return Company(SearchEngine.find_data(soup_page, SearchEngine.LINK_TAG, "company-name").get_text().strip(),
+                       SearchEngine.find_data(soup_page, SearchEngine.LINK_TAG, "icon-envelope")["data-company-email"],
+                       SearchEngine.find_data(soup_page, SearchEngine.DIV_TAG, "address").get_text().strip(),
+                       SearchEngine.find_data(soup_page, SearchEngine.LINK_TAG, "icon-telephone")["title"],
+                       SearchEngine.find_data(soup_page, SearchEngine.LINK_TAG, "icon-website")["href"]
+                       )
+
+    @staticmethod
+    def find_data(soup_page, tag: str, key: str):
+        return soup_page.find(tag, class_=key)
 
     def _get_url(self, searching_key: str):
         return f"{self._URL}{searching_key}"
@@ -43,7 +77,7 @@ def search():
     if request.method == 'POST':
         data = request.form
 
-        return render_template("index.html", title=TITLE, content=search_engine.search(data.get('searching_key')))
+        return render_template("index.html", title=TITLE, companies=search_engine.search(data.get('searching_key')))
     return redirect('/')
 
 
