@@ -102,15 +102,15 @@ def search():
     return redirect('/')
 
 
-@flask_app.route('/health')
-def health():
-    return Response("", 200)
-
-
 @flask_app.route('/get_v_card/<name>')
 def get_v_card(name: str):
     company = name.replace(' ', '')
     return send_file(f"files/{company}.vcf", attachment_filename=f"{company}.vcf")
+
+
+@flask_app.route('/health')
+def health():
+    return Response("", 200)
 
 
 if __name__ == '__main__':
