@@ -11,7 +11,13 @@
 
         <input type="submit" value="Szukaj">
     </form>
-    <br><br>
+    <ul>
+    {% for company in companies %}
+        <li>{{ company.name }}</li>
+    {% endfor %}
+    </ul>
+
+
     {{ content }}
 </body>
 </html>
